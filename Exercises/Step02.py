@@ -58,15 +58,103 @@ def hoge02():
 #    print(center)
     print('Shape of e:', a.shape)
     print('Shape of center:', center.shape)
+    # 先程の真ん中の 6 個の値を 0 にする
+    a[1:3, 1:4] = 0
+    print(a)
 
 
+# 8.3.3. 整数配列による要素の選択
+def hoge03():
+    a = np.array(
+    [[1, 2, 3],
+     [4, 5, 6],
+     [7, 8, 9]]
+    )
+    print(a)
+
+    # 1 行 2 列目：a[0, 1]
+    # 3 行 2 列目：a[2, 1]
+    # 2 行 1 列目：a[1, 0]
+    # の 3 つの要素を選択して並べ、形が (3,) であるような ndarray を作りたいとします。
+    print(np.array([a[0, 1], a[2, 1], a[1, 0]]) )
+    print(a[[0, 2, 1], [1, 1, 0]])
+
+    # 8.4. ndarray のデータ型
+
+    # 整数（Python の int 型）の要素をもつリストを与えた場合
+    x01 = np.array([1, 2, 3])
+    print(x01.dtype)
+
+    # 浮動小数点数（Python の float 型）の要素をもつリストを与えた場合
+    x02 = np.array([1., 2., 3.])
+    print(x02.dtype)
+
+    x03 = np.array([1, 2, 3], dtype=np.float32)
+    print(x03.dtype)
+
+    x04 = np.array([1, 2, 3], dtype='float32')
+    print(x04.dtype)
+
+    x05 = np.array([1, 2, 3], dtype='f')
+    print(x05.dtype)
+    #一度あるデータ型で定義した配列のデータ型を別のものに変更するには、astype を用いて変換を行います。
+    x05 = x05.astype(np.float64)
+    print(x05.dtype)
+
+
+# 8.5. 多次元配列を用いた計算
+def hoge04():
+    a = np.array([
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8]
+    ])
+
+    b = np.array([
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ])
+    # 足し算
+    print( a + b )
+    # 引き算
+    print( a - b )
+    # 掛け算
+    print( a * b )
+    # 割り算
+    print( a / b )
+
+    # 要素ごとに平方根を計算する
+    c = np.sqrt(b)
+    print( c )
+    # 要素ごとに値を n 乗する
+    n = 2
+    print( np.power(b, n) )
+    # or 
+    print( c ** n ) 
+    print('---------------------------------')
+
+# ブロードキャスト broadcast
+def hoge05():
+
+    a = np.array([
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8]
+    ])
+    b = np.array([1, 2, 3])
+    c = a + b
+    print(c)
 
 
 call_list = [
     hoge01,
-    hoge02
+    hoge02,
+    hoge03,
+    hoge04,
+    hoge05
 ]
 
 
 if __name__ == '__main__':
-    call_list[1]()
+    call_list[4]()
