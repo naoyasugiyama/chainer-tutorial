@@ -1,7 +1,7 @@
 # NumPy 入門
 # https://tutorials.chainer.org/ja/08_Introduction_to_NumPy.html
 import numpy as np
-
+import timeit
 
 def hoge01():
     a = np.array([ 1, 2, 3])
@@ -134,7 +134,10 @@ def hoge04():
     print( c ** n ) 
     print('---------------------------------')
 
+
+
 # ブロードキャスト broadcast
+# https://tutorials.chainer.org/ja/08_Introduction_to_NumPy.html
 def hoge05():
 
     a = np.array([
@@ -146,17 +149,83 @@ def hoge05():
     c = a + b
     print(c)
 
+    # 積
+    a = np.array([1, 2, 3])
+    b = np.array([2, 2, 2])
+    c = a * b
+    print(c)
+    # or 
+    print( a * 2  )
+
+
+
+    # ブロードキャストルール 2 つの配列の各次元が同じ大きさになっているか、どちらかが 1 であること
+
+    # 0 ~ 9 の範囲の値をランダムに用いて埋められた (2, 1, 3) と (3, 1) という大きさの配列を作る
+    d = np.random.randint(0, 10, (2, 1, 3))
+    e = np.random.randint(0, 10, (3, 1))
+
+    print('d:\n', d)
+    print('\nd.shape:', d.shape)
+    print('\ne:\n', e)
+    print('\ne.shape:', e.shape)
+    f = d + e
+    print('\nd + e:\n', f)
+    print('\n(d + e).shape:', f.shape)
+
+    print('---------------------------------\n')
+
+    # [] を利用した手動計算
+    print('Original shape:', e.shape)
+    e_expanded = e[np.newaxis, :, :]
+    print('Added new axis to the top:', e_expanded.shape)
+    e_expanded2 = e[:, np.newaxis, :]
+    print('Added new axis to the middle:', e_expanded2.shape)
+
+    print('e:\n', e)
+    print('e_expanded:\n', e_expanded)
+    print('e_expanded2:\n', e_expanded2)
+
+    a = np.array([
+        [0, 1, 2, 1, 0],
+        [3, 4, 5, 4, 3],
+        [6, 7, 8, 7, 6],
+        [3, 4, 5, 4, 4],
+        [0, 1, 2, 1, 0]
+    ])
+
+    b = np.array([1, 2, 3, 4, 5])
+
+    # 結果を格納する配列を先に作る
+    c = np.empty((5, 5))
+
+    # jupyter... %%time
+    for i in range(a.shape[0]):
+        c[i, :] = a[i, :] + b
+    print(c)
+
+    c = a + b
+    print(c)
+
+
+# 8.7. 行列積
+def hoge06():
+    print(0)
+
+
+
 
 call_list = [
     hoge01,
     hoge02,
     hoge03,
     hoge04,
-    hoge05
+    hoge05,
+    hoge06
 ]
 
 
 if __name__ == '__main__':
-    call_list[4]()
+    last = len(call_list) - 1
+    call_list[last]()
 
-#http://www.cl.ecei.tohoku.ac.jp/nlp100/
