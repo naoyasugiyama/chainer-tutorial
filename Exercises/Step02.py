@@ -208,7 +208,7 @@ def hoge05():
     print(c)
 
 
-# 8.7. 行列積
+# 8.7. 行列積 > jupter nodebook > introductoryNumpy.ipynbへ
 def hoge06():
     print(0)
 
